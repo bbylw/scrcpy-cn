@@ -1014,14 +1014,10 @@ footer {
   align-items: flex-start;
 }
 
-.foot-grid pre {
+.foot-copy {
   margin: 0;
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  line-height: 1.6;
+  font-size: 13px;
   color: var(--faint);
-  white-space: pre-wrap;
-  max-width: 52ch;
 }
 
 .foot-links {
