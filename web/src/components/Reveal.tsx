@@ -1,5 +1,6 @@
 import { motion, useReducedMotion } from "framer-motion";
 import type { ReactNode } from "react";
+import { EASE } from "../motion";
 
 export function Reveal({
   children,
@@ -18,7 +19,7 @@ export function Reveal({
       initial={{ opacity: 0, y: 26 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay }}
+      transition={{ duration: 0.6, ease: [...EASE], delay }}
     >
       {children}
     </motion.div>

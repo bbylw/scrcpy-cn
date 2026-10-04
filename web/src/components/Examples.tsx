@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { EASE } from "../motion";
 
 type Example = {
   tab: string;
@@ -151,7 +152,7 @@ export default function Examples() {
             initial={reduced ? false : { opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={reduced ? undefined : { opacity: 0, y: -6 }}
-            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.25, ease: [...EASE] }}
           >
             <p className="term-desc">{ex.desc}</p>
             {ex.lines.map((l) => (

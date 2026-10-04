@@ -1,10 +1,10 @@
 const TILE_COLORS = [
-  ["#d97757", "42%"],
-  ["#6a9bcc", "58%"],
-  ["#788c5d", "34%"],
-  ["#e0b15c", "64%"],
-  ["#b06a8f", "46%"],
-  ["#5fa8a0", "52%"],
+  ["var(--accent)", "42%"],
+  ["var(--blue)", "58%"],
+  ["var(--green)", "34%"],
+  ["var(--amber)", "64%"],
+  ["var(--plum)", "46%"],
+  ["var(--teal)", "52%"],
 ] as const;
 
 function AppStream() {

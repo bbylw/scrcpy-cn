@@ -12,6 +12,8 @@
   --green: #788c5d;
   --blue: #6a9bcc;
   --amber: #e0b15c;
+  --plum: #b06a8f;
+  --teal: #5fa8a0;
 
   --font-display: "Space Grotesk", "Noto Sans SC", sans-serif;
   --font-body: "Noto Sans SC", "Space Grotesk", sans-serif;
@@ -79,6 +81,24 @@ a {
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
+}
+
+.link-accent {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.link-accent:hover {
+  text-decoration: underline;
+}
+
+.link-blue {
+  color: var(--blue);
+  text-decoration: none;
+}
+
+.link-blue:hover {
+  text-decoration: underline;
 }
 
 .wrap {
@@ -649,6 +669,14 @@ section.block {
 .caps .note {
   font-size: 13px;
   color: var(--muted);
+}
+
+.caps .caps-plain {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  padding: 15px 4px;
+  border-bottom: 1px solid var(--line);
 }
 
 /* prerequisites */

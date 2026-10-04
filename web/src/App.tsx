@@ -1,16 +1,14 @@
 import Examples from "./components/Examples";
 import MirrorVisual from "./components/MirrorVisual";
 import { Reveal } from "./components/Reveal";
-import { DOCS, docUrl } from "./data";
-
-const REPO = "https://github.com/Genymobile/scrcpy";
+import { CAPABILITIES, DOCS, docUrl, LINKS } from "./data";
 
 function Logo() {
   return (
     <svg viewBox="0 0 64 64" aria-hidden="true">
-      <rect x="4" y="8" width="30" height="48" rx="6" fill="none" stroke="#d97757" strokeWidth="4" />
-      <rect x="26" y="4" width="34" height="26" rx="4" fill="none" stroke="#b0aea5" strokeWidth="4" />
-      <circle cx="19" cy="48" r="3" fill="#788c5d" />
+      <rect x="4" y="8" width="30" height="48" rx="6" fill="none" stroke="var(--accent)" strokeWidth="4" />
+      <rect x="26" y="4" width="34" height="26" rx="4" fill="none" stroke="var(--muted)" strokeWidth="4" />
+      <circle cx="19" cy="48" r="3" fill="var(--green)" />
     </svg>
   );
 }
@@ -25,20 +23,20 @@ const NAV = [
   ["社区", "#community"],
 ] as const;
 
-const CAPABILITIES: [string, string, string][] = [
-  ["音频转发", "将设备声音同步传到电脑，Android 11+ 支持", "audio.md"],
-  ["录制", "一键录制画面与声音为 MP4 / MKV 等格式", "recording.md"],
-  ["虚拟显示屏", "在独立的新显示屏中启动应用", "virtual-display.md"],
-  ["关闭设备屏幕", "镜像时熄屏省电，电脑端照常显示", "device.md"],
-  ["双向复制粘贴", "电脑与设备剪贴板互转", "control.md"],
-  ["可配置画质", "分辨率、码率、帧率、编码器任意组合", "video.md"],
-  ["摄像头镜像", "把设备摄像头画面投到电脑，Android 12+", "camera.md"],
-  ["作为网络摄像头", "通过 V4L2 暴露给电脑应用（仅限 Linux）", "v4l2.md"],
-  ["物理键盘与鼠标模拟", "以 HID 方式模拟真实键鼠（OTG）", "keyboard.md"],
-  ["游戏手柄支持", "把电脑手柄映射给设备", "gamepad.md"],
-  ["OTG 模式", "无需 USB 调试，纯硬件级控制", "otg.md"],
-  ["以及更多……", "详见用户文档各页面", "shortcuts.md"],
-];
+const LICENSE = `Copyright (C) 2018 Genymobile
+Copyright (C) 2018-2026 Romain Vimont
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.`;
 
 export default function App() {
   return (
@@ -78,32 +76,38 @@ export default function App() {
               </h1>
               <p className="hero-sub">
                 scrcpy（发音为 “<b>scr</b>een <b>c</b>o
-                <b>py</b>”，屏幕复制）通过 USB 或 TCP/IP 镜像安卓设备的画面和声音，并允许用电脑的键盘和鼠标控制设备。
-                不需要 <code>root</code> 权限，也不需要在设备上安装任何应用。支持 Linux、Windows 和 macOS。
+                <b>py</b>”，屏幕复制）通过 USB 或{" "}
+                <a className="link-blue" href={LINKS.tcpip}>
+                  TCP/IP
+                </a>{" "}
+                镜像安卓设备的画面和声音，并允许用电脑的键盘和鼠标控制设备。 不需要 <code>root</code>{" "}
+                权限，也不需要在设备上安装任何应用。支持 Linux、Windows 和 macOS。
               </p>
               <div className="dl-row">
-                <a className="btn btn-primary" href="https://github.com/Genymobile/scrcpy/blob/master/doc/linux.md">
+                <a className="btn btn-primary" href={docUrl("linux.md")}>
                   Linux 下载
                 </a>
-                <a className="btn btn-ghost" href="https://github.com/Genymobile/scrcpy/blob/master/doc/windows.md">
+                <a className="btn btn-ghost" href={docUrl("windows.md")}>
                   Windows 下载
                 </a>
-                <a className="btn btn-ghost" href="https://github.com/Genymobile/scrcpy/blob/master/doc/macos.md">
+                <a className="btn btn-ghost" href={docUrl("macos.md")}>
                   macOS 下载
                 </a>
               </div>
               <p className="hero-note">
                 唯一官方来源：
-                <a href={REPO} target="_blank" rel="noreferrer">
+                <a href={LINKS.repo} target="_blank" rel="noreferrer">
                   github.com/Genymobile/scrcpy
                 </a>
+                ；Windows 用户请阅读{" "}
+                <a href={LINKS.windowsRun}>如何运行</a>。
               </p>
               <div className="safety">
                 <span className="warn-icon">[!]</span>
                 <span>
                   <b>请勿从随意的小网站下载发行版</b>
                   ，即使其名称中包含 scrcpy。发行版签名可在官方文档中
-                  <a href="https://github.com/Genymobile/scrcpy/blob/master/doc/verify-release.md" style={{ color: "var(--blue)" }}>
+                  <a className="link-blue" href={LINKS.verifyRelease}>
                     校验方法
                   </a>
                   。
@@ -145,9 +149,9 @@ export default function App() {
               </Reveal>
               <Reveal className="cw cw-s2" delay={0.05}>
                 <div className="cell">
-                  <span className="num">
+                  <a className="num link-accent" href={LINKS.latencyPr}>
                     35–70<small>ms</small>
-                  </span>
+                  </a>
                   <h3>低延迟</h3>
                   <p>从触摸到画面更新，指尖几乎察觉不到等待。</p>
                 </div>
@@ -188,7 +192,7 @@ export default function App() {
                   <h3>自由</h3>
                   <p>
                     免费且开源（Apache-2.0），
-                    <a href={REPO} style={{ color: "var(--accent)" }}>
+                    <a className="link-accent" href={LINKS.repo}>
                       源码公开可审计
                     </a>
                     。
@@ -211,13 +215,21 @@ export default function App() {
             </Reveal>
             <Reveal>
               <div className="caps">
-                {CAPABILITIES.map(([name, note, file], i) => (
-                  <a key={name} href={docUrl(file)}>
-                    <span className="idx">{String(i + 1).padStart(2, "0")}</span>
-                    <span className="name">{name}</span>
-                    <span className="note">{note}</span>
-                  </a>
-                ))}
+                {CAPABILITIES.map(({ name, note, file }, i) =>
+                  file ? (
+                    <a key={name} href={docUrl(file)}>
+                      <span className="idx">{String(i + 1).padStart(2, "0")}</span>
+                      <span className="name">{name}</span>
+                      <span className="note">{note}</span>
+                    </a>
+                  ) : (
+                    <span key={name} className="caps-plain">
+                      <span className="idx">{String(i + 1).padStart(2, "0")}</span>
+                      <span className="name">{name}</span>
+                      <span className="note">{note}</span>
+                    </span>
+                  ),
+                )}
               </div>
             </Reveal>
           </div>
@@ -244,15 +256,17 @@ export default function App() {
                 <div className="step">
                   <span className="n">02 / 音频</span>
                   <h3>音频转发需 Android 11+</h3>
-                  <p>
-                    画面镜像 Android 5.0 即可用；<code>audio</code> 转发需要 API ≥ 30。
-                  </p>
+                  <p>画面镜像 Android 5.0 即可用；音频转发需要 API ≥ 30。</p>
                 </div>
                 <div className="step">
                   <span className="n">03 / 开发者选项</span>
                   <h3>开启 USB 调试</h3>
                   <p>
-                    在设备的开发者选项中开启[USB 调试]。OTG 模式则完全无需开启 USB 调试。
+                    请确保已在你的设备上
+                    <a className="link-blue" href={LINKS.enableAdb}>
+                      开启了 USB 调试
+                    </a>
+                    。OTG 模式则完全无需开启 USB 调试。
                   </p>
                 </div>
               </div>
@@ -267,7 +281,11 @@ export default function App() {
                   </p>
                   <p>
                     此时需额外开启另一选项 <b>「USB 调试（安全设置）」</b>
-                    （它与「USB 调试」是两个不同的条目），才能使用键盘和鼠标控制设备；设置后需要重启设备。
+                    （它与「USB 调试」是两个不同的条目），才能使用键盘和鼠标控制设备；设置后需要重启设备。详见
+                    <a className="link-blue" href={LINKS.injectEvents}>
+                      修复说明
+                    </a>
+                    。
                   </p>
                 </div>
               </div>
@@ -284,7 +302,7 @@ export default function App() {
                 <h2 className="sec-title">必知技巧</h2>
                 <p className="sec-desc">
                   四条记住就回本，另有
-                  <a href={docUrl("shortcuts")} style={{ color: "var(--accent)" }}>
+                  <a className="link-accent" href={LINKS.shortcuts}>
                     大量快捷键
                   </a>
                   等你挖掘。
@@ -294,22 +312,38 @@ export default function App() {
             <div className="tips">
               <Reveal className="tip">
                 <kbd>scrcpy -m1024</kbd>
-                <b>降低分辨率</b>
+                <b>
+                  <a className="link-accent" href={LINKS.videoSize}>
+                    降低分辨率
+                  </a>
+                </b>
                 <p>大幅提升性能，观感几乎无损。</p>
               </Reveal>
               <Reveal className="tip" delay={0.06}>
                 <kbd>右键点击</kbd>
-                <b>触发 BACK</b>
+                <b>
+                  <a className="link-accent" href={LINKS.mouseBindings}>
+                    触发 BACK
+                  </a>
+                </b>
                 <p>鼠标右键 = 安卓返回键。</p>
               </Reveal>
               <Reveal className="tip" delay={0.12}>
                 <kbd>中键点击</kbd>
-                <b>触发 HOME</b>
+                <b>
+                  <a className="link-accent" href={LINKS.mouseBindings}>
+                    触发 HOME
+                  </a>
+                </b>
                 <p>鼠标中键 = 回到主屏。</p>
               </Reveal>
               <Reveal className="tip" delay={0.18}>
-                <kbd>Alt</kbd> + <kbd>F</kbd>
-                <b>切换全屏</b>
+                <kbd>Alt</kbd> + <kbd>f</kbd>
+                <b>
+                  <a className="link-accent" href={LINKS.fullscreen}>
+                    切换全屏
+                  </a>
+                </b>
                 <p>一键进入沉浸镜像模式。</p>
               </Reveal>
             </div>
@@ -371,19 +405,19 @@ export default function App() {
                   <p>翻译文档内容不一定及时更新。</p>
                   <ul>
                     <li>
-                      <a href="https://github.com/Genymobile/scrcpy/blob/master/FAQ.md">常见问题 FAQ</a>
+                      <a href={LINKS.faq}>常见问题 FAQ</a>
                     </li>
                     <li>
-                      <a href="https://github.com/Genymobile/scrcpy/wiki">翻译文档（Wiki）</a>
+                      <a href={LINKS.wiki}>翻译文档（Wiki）</a>
                     </li>
                     <li>
-                      <a href="https://github.com/Genymobile/scrcpy/blob/master/doc/build.md">构建指南</a>
+                      <a href={docUrl("build.md")}>构建指南</a>
                     </li>
                     <li>
-                      <a href="https://github.com/Genymobile/scrcpy/blob/master/doc/develop.md">开发者文档</a>
+                      <a href={docUrl("develop.md")}>开发者文档</a>
                     </li>
                     <li>
-                      <a href="https://github.com/Genymobile/scrcpy/blob/master/doc/verify-release.md">校验发行版签名</a>
+                      <a href={LINKS.verifyRelease}>校验发行版签名</a>
                     </li>
                   </ul>
                 </div>
@@ -395,7 +429,9 @@ export default function App() {
                       <a href="https://blog.rom1v.com/2018/03/introducing-scrcpy/">scrcpy 介绍</a>
                     </li>
                     <li>
-                      <a href="https://www.genymotion.com/blog/open-source-project-scrcpy-now-works-wirelessly/">Scrcpy 现已支持无线连接</a>
+                      <a href="https://www.genymotion.com/blog/open-source-project-scrcpy-now-works-wirelessly/">
+                        Scrcpy 现已支持无线连接
+                      </a>
                     </li>
                     <li>
                       <a href="https://blog.rom1v.com/2023/03/scrcpy-2-0-with-audio/">Scrcpy 2.0，加入音频功能</a>
@@ -407,7 +443,7 @@ export default function App() {
                   <p>报告 Bug 前请先阅读 FAQ，可能会立即找到解决方案。</p>
                   <ul>
                     <li>
-                      <a href="https://github.com/Genymobile/scrcpy/issues">GitHub Issues（Bug / 新功能 / 提问）</a>
+                      <a href={LINKS.issues}>GitHub Issues（Bug / 新功能 / 提问）</a>
                     </li>
                     <li>
                       <a href="https://www.reddit.com/r/scrcpy">Reddit · r/scrcpy</a>
@@ -427,7 +463,15 @@ export default function App() {
                 <div>
                   <h3>支持 scrcpy</h3>
                   <p>
-                    我是 @rom1v，scrcpy 的作者和维护者。如果你喜欢这款应用，可以支持我的开源工作：
+                    我是{" "}
+                    <a className="link-accent" href={LINKS.rom1v}>
+                      @rom1v
+                    </a>
+                    ，scrcpy 的作者和维护者。如果你喜欢这款应用，可以
+                    <a className="link-accent" href={LINKS.donateBlog}>
+                      支持我的开源工作
+                    </a>
+                    ：
                   </p>
                 </div>
                 <div className="dl-row" style={{ margin: 0 }}>
@@ -450,15 +494,11 @@ export default function App() {
       {/* ============ FOOTER ============ */}
       <footer>
         <div className="wrap foot-grid">
-          <pre>
-            {`Copyright (C) 2018 Genymobile
-Copyright (C) 2018-2026 Romain Vimont
-Licensed under the Apache License, Version 2.0`}
-          </pre>
+          <pre>{LICENSE}</pre>
           <div className="foot-links">
-            <a href={REPO}>GitHub</a>
-            <a href="https://github.com/Genymobile/scrcpy/blob/master/FAQ.md">FAQ</a>
-            <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache-2.0</a>
+            <a href={LINKS.repo}>GitHub</a>
+            <a href={LINKS.faq}>FAQ</a>
+            <a href={LINKS.license}>Apache-2.0</a>
             <a href="#top">回到顶部 ↑</a>
           </div>
         </div>
