@@ -1,7 +1,7 @@
 import Examples from "./components/Examples";
 import MirrorVisual from "./components/MirrorVisual";
 import { Reveal } from "./components/Reveal";
-import { CAPABILITIES, DOCS, docUrl, LINKS } from "./data";
+import { CAPABILITIES, DOCS, docUrl, LINKS, WHATS_NEW } from "./data";
 
 function Logo() {
   return (
@@ -16,6 +16,7 @@ function Logo() {
 const NAV = [
   ["特性", "#traits"],
   ["能力", "#capabilities"],
+  ["更新", "#whats-new"],
   ["前提条件", "#prerequisites"],
   ["必知技巧", "#tips"],
   ["示例", "#examples"],
@@ -32,7 +33,7 @@ export default function App() {
         <div className="wrap nav-inner">
           <a className="logo" href="#top" aria-label="scrcpy 首页">
             <Logo />
-            scrcpy<span className="ver">v4.1</span>
+            scrcpy<span className="ver">v5.0</span>
           </a>
           <nav className="nav-links" aria-label="主导航">
             {NAV.map(([label, href]) => (
@@ -219,6 +220,45 @@ export default function App() {
                 )}
               </div>
             </Reveal>
+          </div>
+        </section>
+
+        {/* ============ WHAT'S NEW ============ */}
+        <section className="block" id="whats-new">
+          <div className="wrap">
+            <Reveal>
+              <div className="sec-head">
+                <p className="sec-eyebrow">What’s New</p>
+                <h2 className="sec-title">v5.0 更新亮点</h2>
+                <p className="sec-desc">
+                  硬件解码领衔：视频改由电脑解码，另有视频缓冲改进、Windows ARM64 官方构建与一批稳定性修复。
+                </p>
+              </div>
+            </Reveal>
+            <div className="news">
+              {WHATS_NEW.map(({ tag, title, note, cmd, file }, i) => (
+                <Reveal
+                  key={title}
+                  className={i === 0 ? "news-wide" : undefined}
+                  delay={Math.min(i * 0.04, 0.28)}
+                >
+                  <div className="cell cell-news">
+                    <span className="tag">{tag}</span>
+                    <h3>
+                      {file ? (
+                        <a className="link-accent" href={docUrl(file)}>
+                          {title}
+                        </a>
+                      ) : (
+                        title
+                      )}
+                    </h3>
+                    <p>{note}</p>
+                    {cmd && <code>{cmd}</code>}
+                  </div>
+                </Reveal>
+              ))}
+            </div>
           </div>
         </section>
 

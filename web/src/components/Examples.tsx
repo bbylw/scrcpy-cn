@@ -24,6 +24,20 @@ const EXAMPLES: Example[] = [
     ],
   },
   {
+    tab: "硬件解码",
+    title: "硬件解码 / 软件解码",
+    desc: (
+      <>
+        自 <b>v5.0</b> 起，视频流默认由电脑<b>硬件解码</b>；也可显式指定解码器或强制软件解码：
+      </>
+    ),
+    lines: [
+      { cmd: "scrcpy --hwdec=auto", comment: "默认：能用硬件就用，否则回退软件" },
+      { cmd: "scrcpy --hwdec=disabled", comment: "强制软件解码" },
+      { cmd: "scrcpy --hwdec=vaapi", comment: "VA-API（仅限 Linux）" },
+    ],
+  },
+  {
     tab: "虚拟显示屏",
     title: "在新虚拟显示屏启动应用",
     desc: (

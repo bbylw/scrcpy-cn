@@ -2,7 +2,7 @@
 > **本 GitHub 仓库（<https://github.com/Genymobile/scrcpy>）是本项目的唯一
 官方来源。请勿从随意的小网站下载发行版，即使其名称中包含 `scrcpy`。**
 
-# scrcpy（v4.1）
+# scrcpy（v5.0）
 
 <img src="https://raw.githubusercontent.com/Genymobile/scrcpy/master/app/data/scrcpy.svg" width="128" height="128" alt="scrcpy" align="right" />
 
@@ -38,6 +38,7 @@ _发音为 "**scr**een **c**o**py**"（屏幕复制）_
  - 镜像时[关闭设备屏幕](https://github.com/Genymobile/scrcpy/blob/master/doc/device.md#turn-screen-off)
  - 双向[复制粘贴](https://github.com/Genymobile/scrcpy/blob/master/doc/control.md#copy-paste)
  - [可配置画质](https://github.com/Genymobile/scrcpy/blob/master/doc/video.md)
+ - 电脑端[硬件解码](https://github.com/Genymobile/scrcpy/blob/master/doc/video.md#hardware-decoding)（默认启用，CPU 占用大幅降低）
  - [摄像头镜像](https://github.com/Genymobile/scrcpy/blob/master/doc/camera.md)（Android 12+）
  - [作为网络摄像头使用（V4L2）](https://github.com/Genymobile/scrcpy/blob/master/doc/v4l2.md)（仅限 Linux）
  - 物理 [键盘][hid-keyboard] 和 [鼠标][hid-mouse] 模拟（HID）
@@ -101,6 +102,14 @@ Injecting input events requires the caller (or the source of the instrumentation
     ```bash
     scrcpy --video-codec=h265 --max-size=1920 --max-fps=60 --no-audio --keyboard=uhid
     scrcpy --video-codec=h265 -m1920 --max-fps=60 --no-audio -K  # 简写形式
+    ```
+
+ - 使用电脑端硬件解码（v5.0 起默认启用），或显式选择解码器：
+
+    ```bash
+    scrcpy --hwdec=auto      # 能用硬件解码就用，否则回退软件解码（默认）
+    scrcpy --hwdec=disabled  # 强制软件解码
+    scrcpy --hwdec=vaapi     # 指定解码器：VA-API（仅限 Linux）
     ```
 
  - 在新的虚拟显示屏中启动 VLC（与设备屏幕相互独立）：
